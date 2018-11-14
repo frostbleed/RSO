@@ -34,7 +34,7 @@ async def on_message(message):
         msg = "BLOO SHUT"
         await client.send_message(message.channel, msg)
     if message.content.startswith("!deploy"):
-        req = str((message.content).lower)
+        req = message.content
         splitreq = req.split(" ")
         msg = splitreq[1]
         # if (splitreq[1] == "drill"):
