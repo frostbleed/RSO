@@ -38,10 +38,10 @@ async def on_message(message):
                 splitreq = (message.content).split(" ")
                 if((splitreq[1] == "drilldeploy") and (threat == "drill") and (form == "deploy")):
                     msg = "(insert drill deployment text here)"
-                    await client.send_message(511736808544010275, msg)
+                    await client.send_message(discord.Object(id='511736808544010275'), msg)
                 elif((splitreq[1] == "emergdeploy") and (threat == "emergency") and (form == "deploy")):
                     msg = "(insert emergency deployment text here)"
-                    await client.send_message(511736808544010275, msg)
+                    await client.send_message(discord.Object(id='511736808544010275'), msg)
                 else:
                     msg = "Invalid confirmation."
                     await client.send_message(message.channel, msg)
