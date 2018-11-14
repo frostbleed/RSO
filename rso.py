@@ -27,7 +27,8 @@ async def on_message(message):
         msg = "\"This is SWAT, not daycare.\" - NCISrox"
         await client.send_message(message.channel, msg)
     if message.content.startswith("!cmds"):
-        msg = "**!cmds**: Display the list of commands."
+        msg = """**!cmds**: Display the list of commands.
+        **!deploy**: Issue a deployment order."""
         await client.send_message(message.channel, msg)
     if message.content.startswith("!deploy"):
         req = (message.content).lower
@@ -45,7 +46,7 @@ async def on_message(message):
                     host = splitreq[3]
                     msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``DRILL DEPLOYMENT REQUEST TO DC, HOSTED BY" + splitreq[3] + "``"
                 else:
-                    msg = "Invalid deployment order. Format: !deploy <drill/emergency> <lv/dc> <name>"
+                    msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
             elif (splitreq[1] == "emergency"):
                 if(splitreq[2] == "lv"):
                     threat = "emergency"
@@ -58,10 +59,10 @@ async def on_message(message):
                     host = splitreq[3]
                     msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``EMERGENCY DEPLOYMENT REQUEST TO DC, HOSTED BY" + splitreq[3] + "``"
                 else:
-                    msg = "Invalid deployment order. Format: !deploy <drill/emergency> <lv/dc> <name>"
+                    msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
             else:
-                msg = "Invalid deployment order. Format: !deploy <drill/emergency> <lv/dc> <name>"
+                msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
         except:
-            msg = "Invalid deployment order. Format: !deploy <drill/emergency> <lv/dc> <name>"
+            msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name> (system reboot)"
         await client.send_message(message.channel, msg)
 client.run(os.getenv('TOKEN'))
