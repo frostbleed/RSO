@@ -12,15 +12,56 @@ async def on_ready():
     print("Radio Switchboard Operator Active")
     await client.change_presence(game=discord.Game(name="STATUS: CENTCOM Online"))
 
+waitingForConfirmation = False
+threat = "drill"
+region = "lv"
+host = "frostbleed"
+
 @client.event
 async def on_message(message):
+    global waitingForConfirmation
+    global threat
+    global region
+    global host
     if message.content.startswith("!daycare"):
         msg = "\"This is SWAT, not daycare.\" - NCISrox"
         await client.send_message(message.channel, msg)
     if message.content.startswith("!cmds"):
         msg = "**!cmds**: Display the list of commands."
         await client.send_message(message.channel, msg)
-    if message.content.startswith("tell bloo to shut"):
-        msg = "bloo shut"
+    if message.content.startswith("!deploy"):
+        req = (message.content).lower
+        try:
+            splitreq = req.split(" ")
+            if (splitreq[1] == "drill"):
+                if(splitreq[2] == "lv"):
+                    threat = "drill"
+                    region = "lv"
+                    host = splitreq[3]
+                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``DRILL DEPLOYMENT REQUEST TO LV, HOSTED BY" + splitreq[3] + "``"
+                elif(splitreq[2] == "dc"):
+                    threat = "drill"
+                    region = "dc"
+                    host = splitreq[3]
+                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``DRILL DEPLOYMENT REQUEST TO DC, HOSTED BY" + splitreq[3] + "``"
+                else:
+                    msg = "Invalid deployment order. Format: !deploy <drill/emergency> <lv/dc> <name>"
+            elif (splitreq[1] == "emergency"):
+                if(splitreq[2] == "lv"):
+                    threat = "emergency"
+                    region = "lv"
+                    host = splitreq[3]
+                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``EMERGENCY DEPLOYMENT REQUEST TO LV, HOSTED BY" + splitreq[3] + "``"
+                elif(splitreq[2] == "dc"):
+                    threat = "emergency"
+                    region = "dc"
+                    host = splitreq[3]
+                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``EMERGENCY DEPLOYMENT REQUEST TO DC, HOSTED BY" + splitreq[3] + "``"
+                else:
+                    msg = "Invalid deployment order. Format: !deploy <drill/emergency> <lv/dc> <name>"
+            else:
+                msg = "Invalid deployment order. Format: !deploy <drill/emergency> <lv/dc> <name>"
+        except:
+            msg = "Invalid deployment order. Format: !deploy <drill/emergency> <lv/dc> <name>"
         await client.send_message(message.channel, msg)
 client.run(os.getenv('TOKEN'))
