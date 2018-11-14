@@ -39,9 +39,11 @@ async def on_message(message):
                 if((splitreq[1] == "drilldeploy") and (threat == "drill") and (form == "deploy")):
                     msg = "(insert drill deployment text here)"
                     await client.send_message(discord.Object(id='511736808544010275'), msg)
+                    await client.send_message(message.channel, "Deployment announced. Lead with pride and dignity. Good luck.")
                 elif((splitreq[1] == "emergdeploy") and (threat == "emergency") and (form == "deploy")):
                     msg = "(insert emergency deployment text here)"
                     await client.send_message(discord.Object(id='511736808544010275'), msg)
+                    await client.send_message(message.channel, "Deployment announced. Lead with pride and dignity. Good luck.")
                 else:
                     msg = "Invalid confirmation."
                     await client.send_message(message.channel, msg)
@@ -59,14 +61,14 @@ async def on_message(message):
                     region = "lv"
                     host = splitreq[3]
                     waitingForConfirmation = True
-                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drilldeploy**: ``DRILL DEPLOYMENT REQUEST TO LV, HOSTED BY " + splitreq[3] + "``" + "\n**ENSURE YOU ARE AT LV PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
+                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drilldeploy**:\n``DRILL DEPLOYMENT REQUEST TO LAS VEGAS, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
                 elif(splitreq[2] == "dc"):
                     form = "deploy"
                     threat = "drill"
                     region = "dc"
                     host = splitreq[3]
                     waitingForConfirmation = True
-                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drilldeploy**: ``DRILL DEPLOYMENT REQUEST TO DC, HOSTED BY " + splitreq[3] + "``" + "\n**ENSURE YOU ARE AT DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
+                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drilldeploy**:\n``DRILL DEPLOYMENT REQUEST TO WASHINGTON DC, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
                 else:
                     msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
             elif (splitreq[1] == "emergency"):
@@ -76,14 +78,14 @@ async def on_message(message):
                     region = "lv"
                     host = splitreq[3]
                     waitingForConfirmation = True
-                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergdeploy**: ``EMERGENCY DEPLOYMENT REQUEST TO LV, HOSTED BY " + splitreq[3] + "``" + "\n**ENSURE YOU ARE AT LV PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
+                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergdeploy**:\n``EMERGENCY DEPLOYMENT REQUEST TO LAS VEGAS, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
                 elif(splitreq[2] == "dc"):
                     form = "deploy"
                     threat = "emergency"
                     region = "dc"
                     host = splitreq[3]
                     waitingForConfirmation = True
-                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergdeploy**: ``EMERGENCY DEPLOYMENT REQUEST TO DC, HOSTED BY " + splitreq[3] + "``" + "\n**ENSURE YOU ARE AT DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
+                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergdeploy**:\n```EMERGENCY DEPLOYMENT REQUEST TO WASHINGTON DC, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
                 else:
                     msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
             else:
