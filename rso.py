@@ -46,7 +46,7 @@ async def on_message(message):
                 msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``DRILL DEPLOYMENT REQUEST TO DC, HOSTED BY" + splitreq[3] + "``"
             else:
                 msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
-         elif (splitreq[1] == "emergency"):
+        elif (splitreq[1] == "emergency"):
             if(splitreq[2] == "lv"):
                 threat = "emergency"
                 region = "lv"
