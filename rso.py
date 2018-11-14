@@ -36,33 +36,34 @@ async def on_message(message):
     if message.content.startswith("!deploy"):
         req = str((message.content).lower)
         splitreq = req.split(" ")
-        if (splitreq[1] == "drill"):
-            if(splitreq[2] == "lv"):
-                threat = "drill"
-                region = "lv"
-                host = splitreq[3]
-                msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``DRILL DEPLOYMENT REQUEST TO LV, HOSTED BY" + splitreq[3] + "``"
-            elif(splitreq[2] == "dc"):
-                threat = "drill"
-                region = "dc"
-                host = splitreq[3]
-                msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``DRILL DEPLOYMENT REQUEST TO DC, HOSTED BY" + splitreq[3] + "``"
-            else:
-                msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
-        elif (splitreq[1] == "emergency"):
-            if(splitreq[2] == "lv"):
-                threat = "emergency"
-                region = "lv"
-                host = splitreq[3]
-                msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``EMERGENCY DEPLOYMENT REQUEST TO LV, HOSTED BY" + splitreq[3] + "``"
-            elif(splitreq[2] == "dc"):
-                threat = "emergency"
-                region = "dc"
-                host = splitreq[3]
-                msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``EMERGENCY DEPLOYMENT REQUEST TO DC, HOSTED BY" + splitreq[3] + "``"
-            else:
-                msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
-        else:
-            msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name> (system reboot)"
+        msg = splitreq[1]
+        # if (splitreq[1] == "drill"):
+        #     if(splitreq[2] == "lv"):
+        #         threat = "drill"
+        #         region = "lv"
+        #         host = splitreq[3]
+        #         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``DRILL DEPLOYMENT REQUEST TO LV, HOSTED BY" + splitreq[3] + "``"
+        #     elif(splitreq[2] == "dc"):
+        #         threat = "drill"
+        #         region = "dc"
+        #         host = splitreq[3]
+        #         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``DRILL DEPLOYMENT REQUEST TO DC, HOSTED BY" + splitreq[3] + "``"
+        #     else:
+        #         msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
+        # elif (splitreq[1] == "emergency"):
+        #     if(splitreq[2] == "lv"):
+        #         threat = "emergency"
+        #         region = "lv"
+        #         host = splitreq[3]
+        #         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``EMERGENCY DEPLOYMENT REQUEST TO LV, HOSTED BY" + splitreq[3] + "``"
+        #     elif(splitreq[2] == "dc"):
+        #         threat = "emergency"
+        #         region = "dc"
+        #         host = splitreq[3]
+        #         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``EMERGENCY DEPLOYMENT REQUEST TO DC, HOSTED BY" + splitreq[3] + "``"
+        #     else:
+        #         msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
+        # else:
+        #     msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name> (system reboot)"
         await client.send_message(message.channel, msg)
 client.run(os.getenv('TOKEN'))
