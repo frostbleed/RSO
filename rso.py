@@ -63,6 +63,6 @@ async def on_message(message):
             else:
                 msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
         else:
-            msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
+            msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name> (system reboot)"
         await client.send_message(message.channel, msg)
 client.run(os.getenv('TOKEN'))
