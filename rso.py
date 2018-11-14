@@ -30,8 +30,11 @@ async def on_message(message):
         msg = """**!cmds**: Display the list of commands.
 **!deploy**: Issue a deployment order."""
         await client.send_message(message.channel, msg)
+    if message.content.startswith("tell bloo to shut"):
+        msg = "BLOO SHUT"
+        await client.send_message(message.channel, msg)
     if message.content.startswith("!deploy"):
-        req = string((message.content).lower)
+        req = str((message.content).lower)
         splitreq = req.split(" ")
         if (splitreq[1] == "drill"):
             if(splitreq[2] == "lv"):
