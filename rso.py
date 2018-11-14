@@ -28,7 +28,7 @@ async def on_message(message):
         await client.send_message(message.channel, msg)
     if message.content.startswith("!cmds"):
         msg = """**!cmds**: Display the list of commands.
-        **!deploy**: Issue a deployment order."""
+    **!deploy**: Issue a deployment order."""
         await client.send_message(message.channel, msg)
     if message.content.startswith("!deploy"):
         req = (message.content).lower
