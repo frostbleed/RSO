@@ -62,5 +62,7 @@ async def on_message(message):
                 msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``EMERGENCY DEPLOYMENT REQUEST TO DC, HOSTED BY" + splitreq[3] + "``"
             else:
                 msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
+        else:
+            msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
         await client.send_message(message.channel, msg)
 client.run(os.getenv('TOKEN'))
