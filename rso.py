@@ -18,7 +18,9 @@ async def on_message(message):
         msg = "\"This is SWAT, not daycare.\" - NCISrox"
         await client.send_message(message.channel, msg)
     if message.content.startswith("!cmds"):
-        msg = "__**RADIO SWITCHBOARD OPERATOR COMMANDS**__\n\n**!cmds**: Display the list of commands."
+        msg = "**!cmds**: Display the list of commands."
         await client.send_message(message.channel, msg)
-
+    if message.content.startswith("tell bloo to shut"):
+        msg = "bloo shut"
+        await client.send_message(message.channel, msg)
 client.run(os.getenv('TOKEN'))
