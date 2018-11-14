@@ -12,6 +12,7 @@ async def on_ready():
     print("Radio Switchboard Operator Active")
     await client.change_presence(game=discord.Game(name="STATUS: CENTCOM Online"))
 
+form = "deploywarn"
 waitingForConfirmation = False
 threat = "drill"
 region = "lv"
@@ -23,46 +24,71 @@ async def on_message(message):
     global threat
     global region
     global host
+    global form
     if message.content.startswith("!daycare"):
         msg = "\"This is SWAT, not daycare.\" - NCISrox"
         await client.send_message(message.channel, msg)
     if message.content.startswith("!cmds"):
         msg = """**!cmds**: Display the list of commands.
-**!deploy**: Issue a deployment order."""
+**!deploy**: Issue a deployment order. Format: !deploy <drill/emergency> <lv/dc> <name>"""
         await client.send_message(message.channel, msg)
-    if message.content.startswith("tell bloo to shut"):
-        msg = "BLOO SHUT"
-        await client.send_message(message.channel, msg)
+    if message.content.startswith("!confirm"):
+        if waitingForConfirmation:
+            try:
+                splitreq = (message.content).split(" ")
+                if((splitreq[1] == "drilldeploy") and (threat == "drill") and (form == "deploy")):
+                    msg = "(insert drill deployment text here)"
+                    await client.send_message(511736808544010275, msg)
+                elif((splitreq[1] == "emergdeploy") and (threat == "emergency") and (form == "deploy")):
+                    msg = "(insert emergency deployment text here)"
+                    await client.send_message(511736808544010275, msg)
+                else:
+                    msg = "Invalid confirmation."
+                    await client.send_message(message.channel, msg)
+            except IndexError:
+                msg = "Invalid confirmation."
+                await client.send_message(message.channel, msg)
     if message.content.startswith("!deploy"):
         req = message.content
         splitreq = req.split(" ")
-        if (splitreq[1] == "drill"):
-            if(splitreq[2] == "lv"):
-                threat = "drill"
-                region = "lv"
-                host = splitreq[3]
-                msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``DRILL DEPLOYMENT REQUEST TO LV, HOSTED BY" + splitreq[3] + "``"
-            elif(splitreq[2] == "dc"):
-                threat = "drill"
-                region = "dc"
-                host = splitreq[3]
-                msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``DRILL DEPLOYMENT REQUEST TO DC, HOSTED BY" + splitreq[3] + "``"
+        try:
+            if (splitreq[1] == "drill"):
+                if(splitreq[2] == "lv"):
+                    form = "deploy"
+                    threat = "drill"
+                    region = "lv"
+                    host = splitreq[3]
+                    waitingForConfirmation = True
+                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drilldeploy**: ``DRILL DEPLOYMENT REQUEST TO LV, HOSTED BY " + splitreq[3] + "``" + "\n**ENSURE YOU ARE AT LV PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
+                elif(splitreq[2] == "dc"):
+                    form = "deploy"
+                    threat = "drill"
+                    region = "dc"
+                    host = splitreq[3]
+                    waitingForConfirmation = True
+                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drilldeploy**: ``DRILL DEPLOYMENT REQUEST TO DC, HOSTED BY " + splitreq[3] + "``" + "\n**ENSURE YOU ARE AT DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
+                else:
+                    msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
+            elif (splitreq[1] == "emergency"):
+                if(splitreq[2] == "lv"):
+                    form = "deploy"
+                    threat = "emergency"
+                    region = "lv"
+                    host = splitreq[3]
+                    waitingForConfirmation = True
+                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergdeploy**: ``EMERGENCY DEPLOYMENT REQUEST TO LV, HOSTED BY " + splitreq[3] + "``" + "\n**ENSURE YOU ARE AT LV PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
+                elif(splitreq[2] == "dc"):
+                    form = "deploy"
+                    threat = "emergency"
+                    region = "dc"
+                    host = splitreq[3]
+                    waitingForConfirmation = True
+                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergdeploy**: ``EMERGENCY DEPLOYMENT REQUEST TO DC, HOSTED BY " + splitreq[3] + "``" + "\n**ENSURE YOU ARE AT DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
+                else:
+                    msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
             else:
                 msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
-        elif (splitreq[1] == "emergency"):
-            if(splitreq[2] == "lv"):
-                threat = "emergency"
-                region = "lv"
-                host = splitreq[3]
-                msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``EMERGENCY DEPLOYMENT REQUEST TO LV, HOSTED BY" + splitreq[3] + "``"
-            elif(splitreq[2] == "dc"):
-                threat = "emergency"
-                region = "dc"
-                host = splitreq[3]
-                msg = "**READ CAREFULLY AND CONFIRM WITH !confirm**: ``EMERGENCY DEPLOYMENT REQUEST TO DC, HOSTED BY" + splitreq[3] + "``"
-            else:
-                msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
-        else:
-            msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name> (system reboot)"
+        except IndexError:
+            msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
         await client.send_message(message.channel, msg)
 client.run(os.getenv('TOKEN'))
