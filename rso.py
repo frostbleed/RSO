@@ -24,6 +24,7 @@ region = "las vegas"
 host = "3616260"
 deploymentIsHappening = False
 standbyIsHappening = False
+requester = 13231
 
 
 @client.event
@@ -32,6 +33,7 @@ async def on_message(message):
     global threat
     global region
     global host
+    global requester
     global form
     global deploymentIsHappening
     global standbyIsHappening
@@ -203,8 +205,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         await client.send_message(message.channel, msg)
 
     if message.content.startswith("!confirm"):
-        if ((message.author.id == "172128816280371200") or (
-                message.author.id == "259819311735111681")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
+        if (message.author.id == requester):
             if waitingForConfirmation:
                 try:
                     splitreq = (message.content).split(" ")
@@ -237,7 +238,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                     msg = "Invalid confirmation."
                     await client.send_message(message.channel, msg)
         else:
-            msg = "You do not have permission to access this command. Contact frostbleed directly for permissions."
+            msg = "Only the requester may confirm an order."
             await client.send_message(message.channel, msg)
 
     if message.content.startswith("!standby"):
@@ -252,12 +253,14 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                         threat = "drill"
                         region = "las vegas"
                         waitingForConfirmation = True
+                        requester = message.author.id
                         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drillstandby**:\n``DRILL DEPLOYMENT STANDBY REQUEST TO LAS VEGAS``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
                     elif (splitreq[2] == "dc"):
                         form = "standby"
                         threat = "drill"
                         region = "washington dc"
                         waitingForConfirmation = True
+                        requester = message.author.id
                         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drillstandby**:\n``DRILL DEPLOYMENT STANDBY REQUEST TO WASHINGTON DC``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
                     else:
                         msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <id>"
@@ -267,12 +270,14 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                         threat = "emergency"
                         region = "las vegas"
                         waitingForConfirmation = True
+                        requester = message.author.id
                         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergstandby**:\n``EMERGENCY DEPLOYMENT STANDBY REQUEST TO LAS VEGAS``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
                     elif (splitreq[2] == "dc"):
                         form = "standby"
                         threat = "emergency"
                         region = "washington dc"
                         waitingForConfirmation = True
+                        requester = message.author.id
                         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergstandby**:\n``EMERGENCY DEPLOYMENT STANDBY REQUEST TO WASHINGTON DC``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
                     else:
                         msg = "Invalid standby request. Format: !standby <drill/emergency> <lv/dc>"
@@ -297,6 +302,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                         region = "las vegas"
                         host = splitreq[3]
                         waitingForConfirmation = True
+                        requester = message.author.id
                         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drilldeploy**:\n``DRILL DEPLOYMENT REQUEST TO LAS VEGAS, HOSTED BY " + \
                               splitreq[
                                   3] + "``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
@@ -306,6 +312,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                         region = "washington dc"
                         host = splitreq[3]
                         waitingForConfirmation = True
+                        requester = message.author.id
                         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drilldeploy**:\n``DRILL DEPLOYMENT REQUEST TO WASHINGTON DC, HOSTED BY " + \
                               splitreq[
                                   3] + "``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
@@ -318,6 +325,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                         region = "las vegas"
                         host = splitreq[3]
                         waitingForConfirmation = True
+                        requester = message.author.id
                         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergdeploy**:\n``EMERGENCY DEPLOYMENT REQUEST TO LAS VEGAS, HOSTED BY " + \
                               splitreq[
                                   3] + "``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
@@ -327,6 +335,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                         region = "washington dc"
                         host = splitreq[3]
                         waitingForConfirmation = True
+                        requester = message.author.id
                         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergdeploy**:\n``EMERGENCY DEPLOYMENT REQUEST TO WASHINGTON DC, HOSTED BY " + \
                               splitreq[
                                   3] + "``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
