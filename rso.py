@@ -79,7 +79,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                 text = (message.content).split(" ")
                 channel = message.channel
                 todel = []
-                async for message in client.logs_from(channel, limit=int(text[1]) + 1):
+                async for message in client.logs_from(channel, limit=(int(text[1]) + 1)):
                     todel.append(message)
                 await client.delete_messages(todel)
                 await client.send_message(message.channel, (amount + " messages deleted."))
