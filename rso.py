@@ -21,21 +21,6 @@ host = "3616260"
 deploymentIsHappening = False
 standbyIsHappening = False
 
-@client.command(pass_context = True)
-async def delete(ctx, amount):
-    if ((ctx.message.author.id == "172128816280371200") or (ctx.message.author.id == "259819311735111681")):  # ADD ONLY LIEUTENANT+ HERE
-        try:
-            channel = ctx.message.channel
-            todel = []
-            async for message in client.logs_from(channel, limit=int(amount) + 1):
-                todel.append(message)
-            await client.delete_messages(todel)
-            await client.send_message(ctx.message.channel, (amount + " messages deleted."))
-        except:
-            await client.send_message(ctx.message.channel, "Deletion error: You must indicate a range of 2 to 100 messages to delete, and no messages may be over 2 weeks old.")
-    else:
-        await client.send_message(ctx.message.channel, "You do not have permission to access this command. Contact frostbleed directly for permissions.")
-
 @client.event
 async def on_message(message):
     global waitingForConfirmation
@@ -238,4 +223,20 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         else:
             msg = "You do not have permission to access this command. Contact frostbleed directly for permissions."
         await client.send_message(message.channel, msg)
+        
+@client.command(pass_context = True)
+async def delete(ctx, amount):
+    if ((ctx.message.author.id == "172128816280371200") or (ctx.message.author.id == "259819311735111681")):  # ADD ONLY LIEUTENANT+ HERE
+        try:
+            channel = ctx.message.channel
+            todel = []
+            async for message in client.logs_from(channel, limit=int(amount) + 1):
+                todel.append(message)
+            await client.delete_messages(todel)
+            await client.send_message(ctx.message.channel, (amount + " messages deleted."))
+        except:
+            await client.send_message(ctx.message.channel, "Deletion error: You must indicate a range of 2 to 100 messages to delete, and no messages may be over 2 weeks old.")
+    else:
+        await client.send_message(ctx.message.channel, "You do not have permission to access this command. Contact frostbleed directly for permissions.")
+        
 client.run(os.getenv('TOKEN'))
