@@ -30,15 +30,15 @@ async def on_message(message):
     timestamp = timestamp.split(" ")
     try:
         deploymsg = ('''<:swat:511794129999626270> <:usa:511794381406208000> __**DEPLOYMENT ORDER**__ <:usa:511794381406208000> <:swat:511794129999626270>
-    **DATE: **``''' + timestamp[0] + '''``
-    **TIME: **``''' + timestamp[1] + " GMT" + '''``
-    **TYPE: **``''' + threat.upper() + '''``
-    **LOCATION: **``''' + region.upper() + '''``
+**DATE: **``''' + timestamp[0] + '''``
+**TIME: **``''' + timestamp[1] + " GMT" + '''``
+**TYPE: **``''' + threat.upper() + '''``
+**LOCATION: **``''' + region.upper() + '''``
         
-    ALL UNITS ARE ORDERED TO **DEPLOY** TO THE CITY OF ''' + region.upper() + "." + '''
-    ALL UNITS SHALL RESPOND **WITHIN FIVE (5) MINUTES** AND REMAIN SILENT UPON ARRIVAL.
+ALL UNITS ARE ORDERED TO **DEPLOY** TO THE CITY OF ''' + region.upper() + "." + '''
+ALL UNITS SHALL RESPOND **WITHIN FIVE (5) MINUTES** AND REMAIN SILENT UPON ARRIVAL.
         
-    FOLLOW THE ADMINISTRATOR IN CHARGE IMMEDIATELY:''' + "\nhttps://www.roblox.com/users/" + host + "/profile"  + "\n@Staff")
+FOLLOW THE ADMINISTRATOR IN CHARGE IMMEDIATELY:''' + "\nhttps://www.roblox.com/users/" + host + "/profile"  + "\n<@&511816562659819530>")
     except:
         print("deployment message error")
     if message.content.startswith("!daycare"):
