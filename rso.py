@@ -60,6 +60,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         if message.author.id == "172128816280371200":
             if deploymentIsHappening:
                 await client.send_message(discord.Object(id='511736808544010275'), "**DEPLOYMENT ENDED AT " + timestamp[1] + " GMT.**")
+                await client.send_message(message.channel, "End of deployment has been announced. Remember to log this deployment on the Trello board.")
                 deploymentIsHappening = False
             else:
                 msg = "There is no deployment to end."
@@ -67,20 +68,24 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         else:
             msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
             await client.send_message(message.channel, msg)
-            
+
     if message.content.startswith("!cancelorder"):
         if message.author.id == "172128816280371200":
             if deploymentIsHappening:
                 await client.send_message(discord.Object(id='511736808544010275'), "**DEPLOYMENT CANCELLED AT " + timestamp[1] + " GMT.**")
+                deploymentIsHappening = False
+                await client.send_message(message.channel, "Deployment cancellation has been announced.")
             elif standbyIsHappening:
                 await client.send_message(discord.Object(id='511736808544010275'), "**STANDBY CANCELLED AT " + timestamp[1] + " GMT.**")
+                standbyIsHappening = False
+                await client.send_message(message.channel, "Standby cancellation has been announced.")
             else:
                 msg = "There is no deployment to end."
                 await client.send_message(message.channel, msg)
         else:
             msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
             await client.send_message(message.channel, msg)
-        
+
     if message.content.startswith("!cmds"):
         msg = """**!cmds**: Display a list of commands.
 **!deploy**: Issue a deployment order. Format: !deploy <drill/emergency> <lv/dc> <user id>
@@ -88,7 +93,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
 **!cancelorder**: Announce the cancellation of the last deployment or standby order.
 **!enddeploy**: Announce the end of a deployment."""
         await client.send_message(message.channel, msg)
-        
+
     if message.content.startswith("!confirm"):
         if message.author.id == "172128816280371200": # ADD ONLY HEAD OF OPERATIONS+ HERE
             if waitingForConfirmation:
