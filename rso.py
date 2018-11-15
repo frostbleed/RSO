@@ -49,7 +49,7 @@ FOLLOW THE ADMINISTRATOR IN CHARGE IMMEDIATELY:''' + "\nhttps://www.roblox.com/u
 **LOCATION: **``''' + region.upper() + '''``
 
 ALL UNITS ARE ORDERED TO **STANDBY** FOR POTENTIAL DEPLOYMENT TO THE CITY OF ''' + region.upper() + "." + '''
-ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.''')
+ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.''' + "\n@everyone")
     except:
         print("deployment message error")
     if message.content.startswith("!daycare"):
@@ -57,7 +57,8 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         await client.send_message(message.channel, msg)
     if message.content.startswith("!cmds"):
         msg = """**!cmds**: Display a list of commands.
-**!deploy**: Issue a deployment order. Format: !deploy <drill/emergency> <lv/dc> <user id>"""
+**!deploy**: Issue a deployment order. Format: !deploy <drill/emergency> <lv/dc> <user id>
+**!standby**: Issue a standby order. Format: !standby <drill/emergency> <lv/dc>"""
         await client.send_message(message.channel, msg)
     if message.content.startswith("!confirm"):
         if message.author.id == "172128816280371200":
@@ -65,13 +66,21 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                 try:
                     splitreq = (message.content).split(" ")
                     if((splitreq[1] == "drilldeploy") and (threat == "drill") and (form == "deploy")):
-                        msg = "(insert drill deployment text here)"
                         await client.send_message(discord.Object(id='511736808544010275'), deploymsg)
                         await client.send_message(message.channel, "Deployment announced. Lead with pride and dignity. Good luck.")
+                        waitingForConfirmation = False
                     elif((splitreq[1] == "emergdeploy") and (threat == "emergency") and (form == "deploy")):
-                        msg = "(insert emergency deployment text here)"
                         await client.send_message(discord.Object(id='511736808544010275'), deploymsg)
                         await client.send_message(message.channel, "Deployment announced. Lead with pride and dignity. Good luck.")
+                        waitingForConfirmation = False
+                    elif((splitreq[1] == "drillstandby") and (threat == "drill") and (form == "standby")):
+                        await client.send_message(discord.Object(id='511736808544010275'), standbymsg)
+                        await client.send_message(message.channel, "Standby order announced.")
+                        waitingForConfirmation = False
+                    elif ((splitreq[1] == "emergstandby") and (threat == "emergency") and (form == "standby")):
+                        await client.send_message(discord.Object(id='511736808544010275'), standbymsg)
+                        await client.send_message(message.channel,"Standby order announced.")
+                        waitingForConfirmation = False
                     else:
                         msg = "Invalid confirmation."
                         await client.send_message(message.channel, msg)
@@ -81,6 +90,50 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         else:
             msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
             await client.send_message(message.channel, msg)
+    
+    if message.content.startswith("!standby"):
+        if message.author.id == "172128816280371200":
+            req = message.content
+            splitreq = req.split(" ")
+            try:
+                if (splitreq[1] == "drill"):
+                    if(splitreq[2] == "lv"):
+                        form = "standby"
+                        threat = "drill"
+                        region = "las vegas"
+                        waitingForConfirmation = True
+                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drillstandby**:\n``DRILL DEPLOYMENT STANDBY REQUEST TO LAS VEGAS, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
+                    elif(splitreq[2] == "dc"):
+                        form = "standby"
+                        threat = "drill"
+                        region = "washington dc"
+                        waitingForConfirmation = True
+                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drillstandby**:\n``DRILL DEPLOYMENT STANDBY REQUEST TO WASHINGTON DC, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
+                    else:
+                        msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <id>"
+                elif (splitreq[1] == "emergency"):
+                    if(splitreq[2] == "lv"):
+                        form = "standby"
+                        threat = "emergency"
+                        region = "las vegas"
+                        waitingForConfirmation = True
+                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergstandby**:\n``EMERGENCY DEPLOYMENT STANDBY REQUEST TO LAS VEGAS, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
+                    elif(splitreq[2] == "dc"):
+                        form = "standby"
+                        threat = "emergency"
+                        region = "washington dc"
+                        waitingForConfirmation = True
+                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergstandby**:\n``EMERGENCY DEPLOYMENT STANDBY REQUEST TO WASHINGTON DC, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
+                    else:
+                        msg = "Invalid standby request. Format: !standby <drill/emergency> <lv/dc>"
+                else:
+                    msg = "Invalid standby request. Format: !standby <drill/emergency> <lv/dc>"
+            except IndexError:
+                msg = "Invalid standby request. Format: !standby <drill/emergency> <lv/dc>"
+        else:
+            msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
+        await client.send_message(message.channel, msg)
+    
     if message.content.startswith("!deploy"):
         if message.author.id == "172128816280371200":
             req = message.content
