@@ -82,7 +82,8 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                 async for message in client.logs_from(channel, limit=(int(text[1]) + 1)):
                     todel.append(message)
                 await client.delete_messages(todel)
-                await client.send_message(message.channel, "Messages deleted.")
+                rtrn = text[1] + " messages deleted."
+                await client.send_message(message.channel, rtrn)
             except:
                 await client.send_message(message.channel, "Deletion error: You must indicate a range of 2 to 100 messages to delete, and no messages may be over 2 weeks old.")
         else:
