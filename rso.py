@@ -90,7 +90,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         else:
             msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
             await client.send_message(message.channel, msg)
-    
+
     if message.content.startswith("!standby"):
         if message.author.id == "172128816280371200":
             req = message.content
@@ -102,13 +102,13 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                         threat = "drill"
                         region = "las vegas"
                         waitingForConfirmation = True
-                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drillstandby**:\n``DRILL DEPLOYMENT STANDBY REQUEST TO LAS VEGAS, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
+                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drillstandby**:\n``DRILL DEPLOYMENT STANDBY REQUEST TO LAS VEGAS``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
                     elif(splitreq[2] == "dc"):
                         form = "standby"
                         threat = "drill"
                         region = "washington dc"
                         waitingForConfirmation = True
-                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drillstandby**:\n``DRILL DEPLOYMENT STANDBY REQUEST TO WASHINGTON DC, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
+                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drillstandby**:\n``DRILL DEPLOYMENT STANDBY REQUEST TO WASHINGTON DC``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
                     else:
                         msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <id>"
                 elif (splitreq[1] == "emergency"):
@@ -117,13 +117,13 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                         threat = "emergency"
                         region = "las vegas"
                         waitingForConfirmation = True
-                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergstandby**:\n``EMERGENCY DEPLOYMENT STANDBY REQUEST TO LAS VEGAS, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
+                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergstandby**:\n``EMERGENCY DEPLOYMENT STANDBY REQUEST TO LAS VEGAS``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
                     elif(splitreq[2] == "dc"):
                         form = "standby"
                         threat = "emergency"
                         region = "washington dc"
                         waitingForConfirmation = True
-                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergstandby**:\n``EMERGENCY DEPLOYMENT STANDBY REQUEST TO WASHINGTON DC, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
+                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergstandby**:\n``EMERGENCY DEPLOYMENT STANDBY REQUEST TO WASHINGTON DC``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
                     else:
                         msg = "Invalid standby request. Format: !standby <drill/emergency> <lv/dc>"
                 else:
@@ -133,7 +133,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         else:
             msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
         await client.send_message(message.channel, msg)
-    
+
     if message.content.startswith("!deploy"):
         if message.author.id == "172128816280371200":
             req = message.content
