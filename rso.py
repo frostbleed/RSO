@@ -4,6 +4,7 @@ from discord.ext import commands
 import asyncio
 import time
 import os
+import datetime
 
 Client  = discord.Client()
 client = commands.Bot(command_prefix = "!")
@@ -15,8 +16,8 @@ async def on_ready():
 form = "deploywarn"
 waitingForConfirmation = False
 threat = "drill"
-region = "lv"
-host = "frostbleed"
+region = "las vegas"
+host = "3616260"
 
 @client.event
 async def on_message(message):
@@ -25,12 +26,27 @@ async def on_message(message):
     global region
     global host
     global form
+    timestamp = str(datetime.datetime.now())
+    timestamp = timestamp.split(" ")
+    try:
+        deploymsg = (''':swat: :usa: __**DEPLOYMENT ORDER**__ :usa: :swat:
+        **DATE: **``''' + timestamp[0] + '''``
+        **TIME: **``''' + timestamp[1] + '''``
+        **TYPE: **``''' + threat.upper() + '''``
+        **LOCATION: **``''' + region.upper() + '''``
+        
+        ALL UNITS ARE ORDERED TO **DEPLOY** TO THE CITY OF ''' + region.upper() + "." + '''
+        ALL UNITS SHALL RESPOND **WITHIN FIVE (5) MINUTES** AND REMAIN SILENT UPON ARRIVAL.
+        
+        FOLLOW THE ADMINISTRATOR IN CHARGE IMMEDIATELY:''' + "\nhttps://www.roblox.com/users/" + host + "/profile")
+    except:
+        print("deployment message error")
     if message.content.startswith("!daycare"):
         msg = "\"This is SWAT, not daycare.\" - NCISrox"
         await client.send_message(message.channel, msg)
     if message.content.startswith("!cmds"):
-        msg = """**!cmds**: Display the list of commands.
-**!deploy**: Issue a deployment order. Format: !deploy <drill/emergency> <lv/dc> <name>"""
+        msg = """**!cmds**: Display a list of commands.
+**!deploy**: Issue a deployment order. Format: !deploy <drill/emergency> <lv/dc> <user id>"""
         await client.send_message(message.channel, msg)
     if message.content.startswith("!confirm"):
         if waitingForConfirmation:
@@ -57,40 +73,40 @@ async def on_message(message):
             if (splitreq[1] == "drill"):
                 if(splitreq[2] == "lv"):
                     form = "deploy"
-                    threat = "drill"
-                    region = "lv"
+                    threat = "DRILL"
+                    region = "las vegas"
                     host = splitreq[3]
                     waitingForConfirmation = True
                     msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drilldeploy**:\n``DRILL DEPLOYMENT REQUEST TO LAS VEGAS, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
                 elif(splitreq[2] == "dc"):
                     form = "deploy"
                     threat = "drill"
-                    region = "dc"
+                    region = "washington dc"
                     host = splitreq[3]
                     waitingForConfirmation = True
                     msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drilldeploy**:\n``DRILL DEPLOYMENT REQUEST TO WASHINGTON DC, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
                 else:
-                    msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
+                    msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <id>"
             elif (splitreq[1] == "emergency"):
                 if(splitreq[2] == "lv"):
                     form = "deploy"
                     threat = "emergency"
-                    region = "lv"
+                    region = "las vegas"
                     host = splitreq[3]
                     waitingForConfirmation = True
                     msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergdeploy**:\n``EMERGENCY DEPLOYMENT REQUEST TO LAS VEGAS, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
                 elif(splitreq[2] == "dc"):
                     form = "deploy"
                     threat = "emergency"
-                    region = "dc"
+                    region = "washington dc"
                     host = splitreq[3]
                     waitingForConfirmation = True
-                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergdeploy**:\n```EMERGENCY DEPLOYMENT REQUEST TO WASHINGTON DC, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
+                    msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergdeploy**:\n``EMERGENCY DEPLOYMENT REQUEST TO WASHINGTON DC, HOSTED BY " + splitreq[3] + "``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
                 else:
-                    msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
+                    msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <user id>"
             else:
-                msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
+                msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <user id>"
         except IndexError:
-            msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <name>"
+            msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <user id>"
         await client.send_message(message.channel, msg)
 client.run(os.getenv('TOKEN'))
