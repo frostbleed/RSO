@@ -18,6 +18,8 @@ waitingForConfirmation = False
 threat = "drill"
 region = "las vegas"
 host = "3616260"
+deploymentIsHappening = False
+standbyIsHappening = False
 
 @client.event
 async def on_message(message):
@@ -26,6 +28,8 @@ async def on_message(message):
     global region
     global host
     global form
+    global deploymentIsHappening
+    global standbyIsHappening
     timestamp = str(datetime.datetime.now())
     timestamp = timestamp.split(" ")
     try:
@@ -38,7 +42,7 @@ async def on_message(message):
 ALL UNITS ARE ORDERED TO **DEPLOY** TO THE CITY OF ''' + region.upper() + "." + '''
 ALL UNITS SHALL RESPOND **WITHIN FIVE (5) MINUTES** AND REMAIN SILENT UPON ARRIVAL.
         
-FOLLOW THE ADMINISTRATOR IN CHARGE IMMEDIATELY:''' + "\nhttps://www.roblox.com/users/" + host + "/profile"  + "\n@everyone")
+***FOLLOW THE ADMINISTRATOR IN CHARGE IMMEDIATELY:***''' + "\nhttps://www.roblox.com/users/" + host + "/profile"  + "\n@everyone")
     except:
         print("deployment message error")
     try:
@@ -52,16 +56,41 @@ ALL UNITS ARE ORDERED TO **STANDBY** FOR POTENTIAL DEPLOYMENT TO THE CITY OF '''
 ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.''' + "\n@everyone")
     except:
         print("deployment message error")
-    if message.content.startswith("!daycare"):
-        msg = "\"This is SWAT, not daycare.\" - NCISrox"
-        await client.send_message(message.channel, msg)
+    if message.content.startswith("!enddeploy"):
+        if message.author.id == "172128816280371200":
+            if deploymentIsHappening:
+                await client.send_message(discord.Object(id='511736808544010275'), "**DEPLOYMENT ENDED AT " + timestamp[1] + " GMT.**")
+                deploymentIsHappening = False
+            else:
+                msg = "There is no deployment to end."
+                await client.send_message(message.channel, msg)
+        else:
+            msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
+            await client.send_message(message.channel, msg)
+            
+    if message.content.startswith("!cancelorder"):
+        if message.author.id == "172128816280371200":
+            if deploymentIsHappening:
+                await client.send_message(discord.Object(id='511736808544010275'), "**DEPLOYMENT CANCELLED AT " + timestamp[1] + " GMT.**")
+            elif standbyIsHappening:
+                await client.send_message(discord.Object(id='511736808544010275'), "**STANDBY CANCELLED AT " + timestamp[1] + " GMT.**")
+            else:
+                msg = "There is no deployment to end."
+                await client.send_message(message.channel, msg)
+        else:
+            msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
+            await client.send_message(message.channel, msg)
+        
     if message.content.startswith("!cmds"):
         msg = """**!cmds**: Display a list of commands.
 **!deploy**: Issue a deployment order. Format: !deploy <drill/emergency> <lv/dc> <user id>
-**!standby**: Issue a standby order. Format: !standby <drill/emergency> <lv/dc>"""
+**!standby**: Issue a standby order. Format: !standby <drill/emergency> <lv/dc>
+**!cancelorder**: Announce the cancellation of the last deployment or standby order.
+**!enddeploy**: Announce the end of a deployment."""
         await client.send_message(message.channel, msg)
+        
     if message.content.startswith("!confirm"):
-        if message.author.id == "172128816280371200":
+        if message.author.id == "172128816280371200": # ADD ONLY HEAD OF OPERATIONS+ HERE
             if waitingForConfirmation:
                 try:
                     splitreq = (message.content).split(" ")
@@ -69,18 +98,22 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                         await client.send_message(discord.Object(id='511736808544010275'), deploymsg)
                         await client.send_message(message.channel, "Deployment announced. Lead with pride and dignity. Good luck.")
                         waitingForConfirmation = False
+                        deploymentIsHappening = True
                     elif((splitreq[1] == "emergdeploy") and (threat == "emergency") and (form == "deploy")):
                         await client.send_message(discord.Object(id='511736808544010275'), deploymsg)
                         await client.send_message(message.channel, "Deployment announced. Lead with pride and dignity. Good luck.")
                         waitingForConfirmation = False
+                        deploymentIsHappening = True
                     elif((splitreq[1] == "drillstandby") and (threat == "drill") and (form == "standby")):
                         await client.send_message(discord.Object(id='511736808544010275'), standbymsg)
                         await client.send_message(message.channel, "Standby order announced.")
                         waitingForConfirmation = False
+                        standbyIsHappening = True
                     elif ((splitreq[1] == "emergstandby") and (threat == "emergency") and (form == "standby")):
                         await client.send_message(discord.Object(id='511736808544010275'), standbymsg)
                         await client.send_message(message.channel,"Standby order announced.")
                         waitingForConfirmation = False
+                        standbyIsHappening = True
                     else:
                         msg = "Invalid confirmation."
                         await client.send_message(message.channel, msg)
@@ -92,7 +125,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
             await client.send_message(message.channel, msg)
 
     if message.content.startswith("!standby"):
-        if message.author.id == "172128816280371200":
+        if message.author.id == "172128816280371200": # ADD ONLY HEAD OF OPERATIONS+ HERE
             req = message.content
             splitreq = req.split(" ")
             try:
@@ -135,7 +168,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         await client.send_message(message.channel, msg)
 
     if message.content.startswith("!deploy"):
-        if message.author.id == "172128816280371200":
+        if message.author.id == "172128816280371200": # ADD ONLY HEAD OF OPERATIONS+ HERE
             req = message.content
             splitreq = req.split(" ")
             try:
