@@ -43,10 +43,10 @@ async def on_message(message):
         deploymsg = ('''<:swat:511794129999626270> <:usa:511794381406208000> __**DEPLOYMENT ORDER**__ <:usa:511794381406208000> <:swat:511794129999626270>
 **DATE: **``''' + timestamp[0] + '''``
 **TIME: **``''' + timestamp[1] + " GMT" + '''``
-**TYPE: **``''' + threat.upper() + '''``
-**LOCATION: **``''' + region.upper() + '''``
+**TYPE: **``''' + threat.lower() + '''``
+**LOCATION: **``''' + region.lower() + '''``
 
-ALL UNITS ARE ORDERED TO **DEPLOY** TO THE CITY OF ''' + region.upper() + "." + '''
+ALL UNITS ARE ORDERED TO **DEPLOY** TO THE CITY OF ''' + region.lower() + "." + '''
 ALL UNITS SHALL RESPOND **WITHIN FIVE (5) MINUTES** AND REMAIN SILENT UPON ARRIVAL.
 
 ***FOLLOW THE ADMINISTRATOR IN CHARGE IMMEDIATELY:***''' + "\nhttps://www.roblox.com/users/" + host + "/profile" + "\n@everyone")
@@ -56,14 +56,14 @@ ALL UNITS SHALL RESPOND **WITHIN FIVE (5) MINUTES** AND REMAIN SILENT UPON ARRIV
         standbymsg = ('''<:swat:511794129999626270> <:usa:511794381406208000> __**STANDBY ORDER**__ <:usa:511794381406208000> <:swat:511794129999626270>
 **DATE: **``''' + timestamp[0] + '''``
 **TIME: **``''' + timestamp[1] + " GMT" + '''``
-**TYPE: **``''' + threat.upper() + '''``
-**LOCATION: **``''' + region.upper() + '''``
+**TYPE: **``''' + threat.lower() + '''``
+**LOCATION: **``''' + region.lower() + '''``
 
-ALL UNITS ARE ORDERED TO **STANDBY** FOR POTENTIAL DEPLOYMENT TO THE CITY OF ''' + region.upper() + "." + '''
+ALL UNITS ARE ORDERED TO **STANDBY** FOR POTENTIAL DEPLOYMENT TO THE CITY OF ''' + region.lower() + "." + '''
 ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.''' + "\n@everyone")
     except:
         print("deployment message error")
-    if message.content.startswith("!enddeploy"):
+    if ((message.content).lower()).startswith("!enddeploy"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
             if deploymentIsHappening:
@@ -79,11 +79,11 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
             msg = "You do not have permission to access this command. Contact frostbleed directly for permissions."
             await client.send_message(message.channel, msg)
 
-    if message.content.startswith("!daycare"):
+    if ((message.content).lower()).startswith("!daycare"):
         msg = "\"This is SWAT, not daycare.\" - NCISrox"
         await client.send_message(message.channel, msg)
 
-    if message.content.startswith("!delete"):
+    if ((message.content).lower()).startswith("!delete"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681")):  # ADD ONLY LIEUTENANT+ HERE
             try:
@@ -102,7 +102,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
             await client.send_message(message.channel,
                                       "You do not have permission to access this command. Contact frostbleed directly for permissions.")
 
-    if message.content.startswith("!cancelorder"):
+    if ((message.content).lower()).startswith("!cancelorder"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
             if deploymentIsHappening:
@@ -122,7 +122,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
             msg = "You do not have permission to access this command. Contact frostbleed directly for permissions."
             await client.send_message(message.channel, msg)
 
-    if message.content.startswith("!cmds"):
+    if ((message.content).lower()).startswith("!cmds"):
         msg = """**!cmds**: Display a list of commands.
 **!deploy**: Issue a deployment order. Format: !deploy <drill/emergency> <lv/dc> <user id>
 **!standby**: Issue a standby order. Format: !standby <drill/emergency> <lv/dc>
@@ -133,7 +133,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
 **!8ball**: Ask a question, and say !8ball for the RSO's opinion."""
         await client.send_message(message.channel, msg)
 
-    if message.content.startswith("!8ball"):
+    if ((message.content).lower()).startswith("!8ball"):
         choice = random.randint(1,11)
         if choice == 1:
             msg = "🎱 I don't know."
@@ -159,7 +159,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
             msg = "🎱 Never."
         await client.send_message(message.channel, msg)
 
-    if message.content.startswith("!rps"):
+    if ((message.content).lower()).startswith("!rps"):
         pickanumber = random.randint(1, 4)
         if pickanumber == 1:
             play = "rock"
@@ -169,7 +169,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
             play = "paper"
         else:
             play = "rock"
-        msgval = (message.content).split(" ")
+        msgval = ((message.content).lower()).split(" ")
         try:
             if(msgval[1] == "rock"):
                 if play == "rock":
@@ -204,7 +204,19 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
             msg = "Invalid rock-paper-scissors command. Format: !rps <rock/paper/scissors>"
         await client.send_message(message.channel, msg)
 
-    if message.content.startswith("!confirm"):
+    if ((message.content).lower()).startswith("!cancel"):
+        if ((message.author.id == "172128816280371200") or (
+                message.author.id == "259819311735111681")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
+            if(waitingForConfirmation):
+                waitingForConfirmation = False
+                msg = "**CANCELLATION CONFIRMED**"
+            else:
+                msg = "No orders to cancel."
+        else:
+            msg = "You do not have permission to access this command. Contact frostbleed directly for permissions."
+        await client.send_message(message.channel, msg)
+            
+    if ((message.content).lower()).startswith("!confirm"):
         if (message.author.id == requester):
             if waitingForConfirmation:
                 try:
@@ -241,10 +253,10 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
             msg = "Only the requester may confirm an order."
             await client.send_message(message.channel, msg)
 
-    if message.content.startswith("!standby"):
+    if ((message.content).lower()).startswith("!standby"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
-            req = message.content
+            req = (message.content).lower()
             splitreq = req.split(" ")
             try:
                 if (splitreq[1] == "drill"):
@@ -254,14 +266,14 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                         region = "las vegas"
                         waitingForConfirmation = True
                         requester = message.author.id
-                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drillstandby**:\n``DRILL DEPLOYMENT STANDBY REQUEST TO LAS VEGAS``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
+                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drillstandby**:\n``DRILL DEPLOYMENT STANDBY REQUEST TO LAS VEGAS``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, TYPE !cancel**"
                     elif (splitreq[2] == "dc"):
                         form = "standby"
                         threat = "drill"
                         region = "washington dc"
                         waitingForConfirmation = True
                         requester = message.author.id
-                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drillstandby**:\n``DRILL DEPLOYMENT STANDBY REQUEST TO WASHINGTON DC``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
+                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drillstandby**:\n``DRILL DEPLOYMENT STANDBY REQUEST TO WASHINGTON DC``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, TYPE !cancel**"
                     else:
                         msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <id>"
                 elif (splitreq[1] == "emergency"):
@@ -271,14 +283,14 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                         region = "las vegas"
                         waitingForConfirmation = True
                         requester = message.author.id
-                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergstandby**:\n``EMERGENCY DEPLOYMENT STANDBY REQUEST TO LAS VEGAS``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
+                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergstandby**:\n``EMERGENCY DEPLOYMENT STANDBY REQUEST TO LAS VEGAS``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, TYPE !cancel**"
                     elif (splitreq[2] == "dc"):
                         form = "standby"
                         threat = "emergency"
                         region = "washington dc"
                         waitingForConfirmation = True
                         requester = message.author.id
-                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergstandby**:\n``EMERGENCY DEPLOYMENT STANDBY REQUEST TO WASHINGTON DC``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE STANDBY COMMAND**"
+                        msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergstandby**:\n``EMERGENCY DEPLOYMENT STANDBY REQUEST TO WASHINGTON DC``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, TYPE !cancel**"
                     else:
                         msg = "Invalid standby request. Format: !standby <drill/emergency> <lv/dc>"
                 else:
@@ -289,10 +301,10 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
             msg = "You do not have permission to access this command. Contact frostbleed directly for permissions."
         await client.send_message(message.channel, msg)
 
-    if message.content.startswith("!deploy"):
+    if ((message.content).lower()).startswith("!deploy"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
-            req = message.content
+            req = (message.content).lower()
             splitreq = req.split(" ")
             try:
                 if (splitreq[1] == "drill"):
@@ -305,7 +317,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                         requester = message.author.id
                         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drilldeploy**:\n``DRILL DEPLOYMENT REQUEST TO LAS VEGAS, HOSTED BY " + \
                               splitreq[
-                                  3] + "``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
+                                  3] + "``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, TYPE !cancel**"
                     elif (splitreq[2] == "dc"):
                         form = "deploy"
                         threat = "drill"
@@ -315,7 +327,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                         requester = message.author.id
                         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm drilldeploy**:\n``DRILL DEPLOYMENT REQUEST TO WASHINGTON DC, HOSTED BY " + \
                               splitreq[
-                                  3] + "``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
+                                  3] + "``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, TYPE !cancel**"
                     else:
                         msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <id>"
                 elif (splitreq[1] == "emergency"):
@@ -328,7 +340,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                         requester = message.author.id
                         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergdeploy**:\n``EMERGENCY DEPLOYMENT REQUEST TO LAS VEGAS, HOSTED BY " + \
                               splitreq[
-                                  3] + "``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
+                                  3] + "``" + "\n\n**ENSURE YOU ARE AT LAS VEGAS PRIOR TO CONFIRMING**\n**IF INCORRECT, TYPE !cancel**"
                     elif (splitreq[2] == "dc"):
                         form = "deploy"
                         threat = "emergency"
@@ -338,7 +350,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                         requester = message.author.id
                         msg = "**READ CAREFULLY AND CONFIRM WITH !confirm emergdeploy**:\n``EMERGENCY DEPLOYMENT REQUEST TO WASHINGTON DC, HOSTED BY " + \
                               splitreq[
-                                  3] + "``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, RETYPE DEPLOY COMMAND**"
+                                  3] + "``" + "\n\n**ENSURE YOU ARE AT WASHINGTON DC PRIOR TO CONFIRMING**\n**IF INCORRECT, TYPE !cancel**"
                     else:
                         msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <user id>"
                 else:
