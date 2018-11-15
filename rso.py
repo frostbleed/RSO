@@ -223,7 +223,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         else:
             msg = "You do not have permission to access this command. Contact frostbleed directly for permissions."
         await client.send_message(message.channel, msg)
-        
+
 @client.command(pass_context = True)
 async def delete(ctx, amount):
     if ((ctx.message.author.id == "172128816280371200") or (ctx.message.author.id == "259819311735111681")):  # ADD ONLY LIEUTENANT+ HERE
