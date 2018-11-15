@@ -21,6 +21,20 @@ host = "3616260"
 deploymentIsHappening = False
 standbyIsHappening = False
 
+@client.command(pass_context = True)
+async def delete(ctx, amount):
+    if ((ctx.message.author.id == "172128816280371200") or (ctx.message.author.id == "259819311735111681")):  # ADD ONLY LIEUTENANT+ HERE
+        try:
+            channel = ctx.message.channel
+            todel = []
+            async for message in client.logs_from(channel, limit=int(amount) + 1):
+                messages.append(message)
+            await client.say(amount + " messages deleted.")
+        except:
+            client.say("Deletion error: You must indicate a range of 2 to 100 messages to delete, and no messages may be over 2 weeks old.")
+    else:
+        client.say("You do not have permission to access this command. Contact frostbleed directly for permissions.")
+
 @client.event
 async def on_message(message):
     global waitingForConfirmation
@@ -66,34 +80,12 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                 msg = "There is no deployment to end."
                 await client.send_message(message.channel, msg)
         else:
-            msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
+            msg = "You do not have permission to access this command. Contact frostbleed directly for permissions."
             await client.send_message(message.channel, msg)
 
     if message.content.startswith("!daycare"):
         msg = "\"This is SWAT, not daycare.\" - NCISrox"
         await client.send_message(message.channel, msg)
-
-    if message.content.startswith("!delete"):
-        if ((message.author.id == "172128816280371200") or (message.author.id == "259819311735111681")):  # ADD ONLY LIEUTENANT+ HERE
-            bm = (message.content).split(" ")
-            try:
-                nums = int(bm[1])
-            except:
-                msg = "Invalid message deletion request. Format: !delete <integer>"
-                await client.send_message(message.channel, msg)
-
-            mgs = []  # Empty list to put all the messages in the log
-            for x in Client.logs_from(ctx.message.channel, limit=nums):
-                mgs.append(x)
-            await Client.delete_messages(mgs)
-            msg = "Messages deleted."
-            await client.send_message(message.channel, msg)
-
-            msg = "Message deletion error. You may only delete 2 to 100 messages, and no messages may be over 2 weeks old."
-            await client.send_message(message.channel, msg)
-        else:
-            msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
-            await client.send_message(message.channel, msg)
 
     if message.content.startswith("!cancelorder"):
         if ((message.author.id == "172128816280371200") or (message.author.id == "259819311735111681")): # ADD ONLY HEAD OF OPERATIONS+ HERE
@@ -109,7 +101,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                 msg = "There is no deployment to end."
                 await client.send_message(message.channel, msg)
         else:
-            msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
+            msg = "You do not have permission to access this command. Contact frostbleed directly for permissions."
             await client.send_message(message.channel, msg)
 
     if message.content.startswith("!cmds"):
@@ -153,7 +145,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                     msg = "Invalid confirmation."
                     await client.send_message(message.channel, msg)
         else:
-            msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
+            msg = "You do not have permission to access this command. Contact frostbleed directly for permissions."
             await client.send_message(message.channel, msg)
 
     if message.content.startswith("!standby"):
@@ -196,7 +188,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
             except IndexError:
                 msg = "Invalid standby request. Format: !standby <drill/emergency> <lv/dc>"
         else:
-            msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
+            msg = "You do not have permission to access this command. Contact frostbleed directly for permissions."
         await client.send_message(message.channel, msg)
 
     if message.content.startswith("!deploy"):
@@ -243,6 +235,6 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
             except IndexError:
                 msg = "Invalid deployment request. Format: !deploy <drill/emergency> <lv/dc> <user id>"
         else:
-            msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
+            msg = "You do not have permission to access this command. Contact frostbleed directly for permissions."
         await client.send_message(message.channel, msg)
 client.run(os.getenv('TOKEN'))
