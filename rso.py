@@ -38,7 +38,7 @@ async def on_message(message):
         ALL UNITS ARE ORDERED TO **DEPLOY** TO THE CITY OF ''' + region.upper() + "." + '''
         ALL UNITS SHALL RESPOND **WITHIN FIVE (5) MINUTES** AND REMAIN SILENT UPON ARRIVAL.
         
-        FOLLOW THE ADMINISTRATOR IN CHARGE IMMEDIATELY:''' + "\nhttps://www.roblox.com/users/" + host + "/profile")
+        FOLLOW THE ADMINISTRATOR IN CHARGE IMMEDIATELY:''' + "\nhttps://www.roblox.com/users/" + host + "/profile" + "\n@Staff")
     except:
         print("deployment message error")
     if message.content.startswith("!daycare"):
@@ -54,11 +54,11 @@ async def on_message(message):
                 splitreq = (message.content).split(" ")
                 if((splitreq[1] == "drilldeploy") and (threat == "drill") and (form == "deploy")):
                     msg = "(insert drill deployment text here)"
-                    await client.send_message(discord.Object(id='511736808544010275'), msg)
+                    await client.send_message(discord.Object(id='511736808544010275'), deploymsg)
                     await client.send_message(message.channel, "Deployment announced. Lead with pride and dignity. Good luck.")
                 elif((splitreq[1] == "emergdeploy") and (threat == "emergency") and (form == "deploy")):
                     msg = "(insert emergency deployment text here)"
-                    await client.send_message(discord.Object(id='511736808544010275'), msg)
+                    await client.send_message(discord.Object(id='511736808544010275'), deploymsg)
                     await client.send_message(message.channel, "Deployment announced. Lead with pride and dignity. Good luck.")
                 else:
                     msg = "Invalid confirmation."
@@ -73,7 +73,7 @@ async def on_message(message):
             if (splitreq[1] == "drill"):
                 if(splitreq[2] == "lv"):
                     form = "deploy"
-                    threat = "DRILL"
+                    threat = "drill"
                     region = "las vegas"
                     host = splitreq[3]
                     waitingForConfirmation = True
