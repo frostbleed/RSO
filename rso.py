@@ -38,7 +38,7 @@ async def on_message(message):
 ALL UNITS ARE ORDERED TO **DEPLOY** TO THE CITY OF ''' + region.upper() + "." + '''
 ALL UNITS SHALL RESPOND **WITHIN FIVE (5) MINUTES** AND REMAIN SILENT UPON ARRIVAL.
         
-FOLLOW THE ADMINISTRATOR IN CHARGE IMMEDIATELY:''' + "\nhttps://www.roblox.com/users/" + host + "/profile"  + "\n<@&511816562659819530>")
+FOLLOW THE ADMINISTRATOR IN CHARGE IMMEDIATELY:''' + "\nhttps://www.roblox.com/users/" + host + "/profile"  + "\n<@&everyone>")
     except:
         print("deployment message error")
     if message.content.startswith("!daycare"):
