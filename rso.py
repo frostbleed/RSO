@@ -29,11 +29,11 @@ async def delete(ctx, amount):
             todel = []
             async for message in client.logs_from(channel, limit=int(amount) + 1):
                 messages.append(message)
-            await client.say(amount + " messages deleted.")
+            await client.send_message(ctx.message.channel, (amount + " messages deleted."))
         except:
-            client.say("Deletion error: You must indicate a range of 2 to 100 messages to delete, and no messages may be over 2 weeks old.")
+            await client.send_message(ctx.message.channel, "Deletion error: You must indicate a range of 2 to 100 messages to delete, and no messages may be over 2 weeks old.")
     else:
-        client.say("You do not have permission to access this command. Contact frostbleed directly for permissions.")
+        await client.send_message(ctx.message.channel, "You do not have permission to access this command. Contact frostbleed directly for permissions.")
 
 @client.event
 async def on_message(message):
