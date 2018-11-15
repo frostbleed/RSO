@@ -83,7 +83,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
                 await client.send_message(message.channel, msg)
 
             mgs = []  # Empty list to put all the messages in the log
-            for x in Client.logs_from(client.message.channel, limit=nums):
+            for x in Client.logs_from(ctx.message.channel, limit=nums):
                 mgs.append(x)
             await Client.delete_messages(mgs)
             msg = "Messages deleted."
