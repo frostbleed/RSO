@@ -81,14 +81,14 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
             except:
                 msg = "Invalid message deletion request. Format: !delete <integer>"
                 await client.send_message(message.channel, msg)
-        
+
             mgs = []  # Empty list to put all the messages in the log
-            async for x in Client.logs_from(client.message.channel, limit=nums):
+            for x in Client.logs_from(client.message.channel, limit=nums):
                 mgs.append(x)
             await Client.delete_messages(mgs)
             msg = "Messages deleted."
             await client.send_message(message.channel, msg)
-        
+
             msg = "Message deletion error. You may only delete 2 to 100 messages, and no messages may be over 2 weeks old."
             await client.send_message(message.channel, msg)
         else:
