@@ -57,7 +57,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
     except:
         print("deployment message error")
     if message.content.startswith("!enddeploy"):
-        if message.author.id == "172128816280371200":
+        if ((message.author.id == "172128816280371200") or (message.author.id == "259819311735111681")): # ADD ONLY HEAD OF OPERATIONS+ HERE
             if deploymentIsHappening:
                 await client.send_message(discord.Object(id='511736808544010275'), "**DEPLOYMENT ENDED AT " + timestamp[1] + " GMT.**")
                 await client.send_message(message.channel, "End of deployment has been announced. Remember to log this deployment on the Trello board.")
@@ -69,8 +69,35 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
             msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
             await client.send_message(message.channel, msg)
 
+    if message.content.startswith("!daycare"):
+        msg = "\"This is SWAT, not daycare.\" - NCISrox"
+        await client.send_message(message.channel, msg)
+
+    if message.content.startswith("!delete"):
+        if ((message.author.id == "172128816280371200") or (message.author.id == "259819311735111681")):  # ADD ONLY LIEUTENANT+ HERE
+            bm = (message.content).split(" ")
+            try:
+                nums = int(bm[1])
+            except:
+                msg = "Invalid message deletion request. Format: !delete <integer>"
+                await client.send_message(message.channel, msg)
+            try:
+                mgs = []  # Empty list to put all the messages in the log
+                async for x in Client.logs_from(client.message.channel, limit=nums):
+                    mgs.append(x)
+                await Client.delete_messages(mgs)
+                msg = "Messages deleted."
+                await client.send_message(message.channel, msg)
+            except:
+                msg = "Message deletion error. You may only delete 2 to 100 messages, and no messages may be over 2 weeks old."
+                await client.send_message(message.channel, msg)
+        else:
+            msg = "You do not have permissions to access this command. Contact frostbleed directly for permissions."
+            await client.send_message(message.channel, msg)
+        await client.send_message(message.channel, msg)
+
     if message.content.startswith("!cancelorder"):
-        if message.author.id == "172128816280371200":
+        if ((message.author.id == "172128816280371200") or (message.author.id == "259819311735111681")): # ADD ONLY HEAD OF OPERATIONS+ HERE
             if deploymentIsHappening:
                 await client.send_message(discord.Object(id='511736808544010275'), "**DEPLOYMENT CANCELLED AT " + timestamp[1] + " GMT.**")
                 deploymentIsHappening = False
@@ -91,11 +118,12 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
 **!deploy**: Issue a deployment order. Format: !deploy <drill/emergency> <lv/dc> <user id>
 **!standby**: Issue a standby order. Format: !standby <drill/emergency> <lv/dc>
 **!cancelorder**: Announce the cancellation of the last deployment or standby order.
-**!enddeploy**: Announce the end of a deployment."""
+**!enddeploy**: Announce the end of a deployment.
+**!delete**: Delete a given number of messages. Format: !delete <integer>"""
         await client.send_message(message.channel, msg)
 
     if message.content.startswith("!confirm"):
-        if message.author.id == "172128816280371200": # ADD ONLY HEAD OF OPERATIONS+ HERE
+        if ((message.author.id == "172128816280371200") or (message.author.id == "259819311735111681")): # ADD ONLY HEAD OF OPERATIONS+ HERE
             if waitingForConfirmation:
                 try:
                     splitreq = (message.content).split(" ")
@@ -130,7 +158,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
             await client.send_message(message.channel, msg)
 
     if message.content.startswith("!standby"):
-        if message.author.id == "172128816280371200": # ADD ONLY HEAD OF OPERATIONS+ HERE
+        if ((message.author.id == "172128816280371200") or (message.author.id == "259819311735111681")): # ADD ONLY HEAD OF OPERATIONS+ HERE
             req = message.content
             splitreq = req.split(" ")
             try:
@@ -173,7 +201,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         await client.send_message(message.channel, msg)
 
     if message.content.startswith("!deploy"):
-        if message.author.id == "172128816280371200": # ADD ONLY HEAD OF OPERATIONS+ HERE
+        if ((message.author.id == "172128816280371200") or (message.author.id == "259819311735111681")): # ADD ONLY HEAD OF OPERATIONS+ HERE
             req = message.content
             splitreq = req.split(" ")
             try:
