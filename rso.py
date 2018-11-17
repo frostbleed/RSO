@@ -43,10 +43,10 @@ async def on_message(message):
         deploymsg = ('''<:swat:511794129999626270> <:usa:511794381406208000> __**DEPLOYMENT ORDER**__ <:usa:511794381406208000> <:swat:511794129999626270>
 **DATE: **``''' + timestamp[0] + '''``
 **TIME: **``''' + timestamp[1] + " GMT" + '''``
-**TYPE: **``''' + threat.lower() + '''``
-**LOCATION: **``''' + region.lower() + '''``
+**TYPE: **``''' + threat.upper() + '''``
+**LOCATION: **``''' + region.upper() + '''``
 
-ALL UNITS ARE ORDERED TO **DEPLOY** TO THE CITY OF ''' + region.lower() + "." + '''
+ALL UNITS ARE ORDERED TO **DEPLOY** TO THE CITY OF ''' + region.upper() + "." + '''
 ALL UNITS SHALL RESPOND **WITHIN FIVE (5) MINUTES** AND REMAIN SILENT UPON ARRIVAL.
 
 ***FOLLOW THE ADMINISTRATOR IN CHARGE IMMEDIATELY:***''' + "\nhttps://www.roblox.com/users/" + host + "/profile" + "\n@everyone")
@@ -56,10 +56,10 @@ ALL UNITS SHALL RESPOND **WITHIN FIVE (5) MINUTES** AND REMAIN SILENT UPON ARRIV
         standbymsg = ('''<:swat:511794129999626270> <:usa:511794381406208000> __**STANDBY ORDER**__ <:usa:511794381406208000> <:swat:511794129999626270>
 **DATE: **``''' + timestamp[0] + '''``
 **TIME: **``''' + timestamp[1] + " GMT" + '''``
-**TYPE: **``''' + threat.lower() + '''``
-**LOCATION: **``''' + region.lower() + '''``
+**TYPE: **``''' + threat.upper() + '''``
+**LOCATION: **``''' + region.upper() + '''``
 
-ALL UNITS ARE ORDERED TO **STANDBY** FOR POTENTIAL DEPLOYMENT TO THE CITY OF ''' + region.lower() + "." + '''
+ALL UNITS ARE ORDERED TO **STANDBY** FOR POTENTIAL DEPLOYMENT TO THE CITY OF ''' + region.upper() + "." + '''
 ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.''' + "\n@everyone")
     except:
         print("deployment message error")
