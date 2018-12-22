@@ -66,7 +66,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
     if ((message.content).lower()).startswith("!enddeploy"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
-                message.author.id == "189796352442630145") or (
+                message.author.id == "148867458441281537") or (
                 message.author.id == "417606473947021312")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
             if deploymentIsHappening:
                 await client.send_message(discord.Object(id='511736808544010275'),
@@ -88,7 +88,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
     if ((message.content).lower()).startswith("!delete"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
-                message.author.id == "189796352442630145") or (
+                message.author.id == "148867458441281537") or (
                 message.author.id == "417606473947021312")):  # ADD ONLY LIEUTENANT+ HERE
             try:
                 text = (message.content).split(" ")
@@ -109,7 +109,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
     if ((message.content).lower()).startswith("!cancelorder"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
-                message.author.id == "189796352442630145") or (
+                message.author.id == "148867458441281537") or (
                 message.author.id == "417606473947021312")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
             if deploymentIsHappening:
                 await client.send_message(discord.Object(id='511736808544010275'),
@@ -213,7 +213,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
     if ((message.content).lower()).startswith("!cancel"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
-                message.author.id == "189796352442630145")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
+                message.author.id == "148867458441281537")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
             if(waitingForConfirmation):
                 waitingForConfirmation = False
                 msg = "**CANCELLATION CONFIRMED**"
@@ -263,7 +263,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
     if ((message.content).lower()).startswith("!standby"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
-                message.author.id == "189796352442630145") or (
+                message.author.id == "148867458441281537") or (
                 message.author.id == "417606473947021312")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
             req = (message.content).lower()
             splitreq = req.split(" ")
@@ -313,7 +313,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
     if ((message.content).lower()).startswith("!deploy"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
-                message.author.id == "189796352442630145") or (
+                message.author.id == "148867458441281537") or (
                 message.author.id == "417606473947021312")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
             req = (message.content).lower()
             splitreq = req.split(" ")
