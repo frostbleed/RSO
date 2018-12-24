@@ -14,7 +14,7 @@ client = commands.Bot(command_prefix="!")
 @client.event
 async def on_ready():
     print("Radio Switchboard Operator Active")
-    await client.change_presence(game=discord.Game(name="STATUS: CENTCOM Online"))
+    await client.change_presence(game=discord.Game(name="STATUS: Merry Christmas!"))
 
 
 form = "deploywarn"
