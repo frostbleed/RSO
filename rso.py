@@ -14,7 +14,7 @@ client = commands.Bot(command_prefix="!")
 @client.event
 async def on_ready():
     print("Radio Switchboard Operator Active")
-    await client.change_presence(game=discord.Game(name="STATUS: Merry Christmas!"))
+    await client.change_presence(game=discord.Game(name="STATUS: CENTCOM Online"))
 
 
 form = "deploywarn"
@@ -67,7 +67,8 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
                 message.author.id == "148867458441281537") or (
-                message.author.id == "417606473947021312")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
+                message.author.id == "417606473947021312") or (
+                message.author.id == "249181931281842186")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
             if deploymentIsHappening:
                 await client.send_message(discord.Object(id='511736808544010275'),
                                           "**DEPLOYMENT ENDED AT " + timestamp[1] + " GMT.**")
@@ -89,7 +90,8 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
                 message.author.id == "148867458441281537") or (
-                message.author.id == "417606473947021312")):  # ADD ONLY LIEUTENANT+ HERE
+                message.author.id == "417606473947021312") or (
+                message.author.id == "249181931281842186")):  # ADD ONLY LIEUTENANT+ HERE
             try:
                 text = (message.content).split(" ")
                 channel = message.channel
@@ -110,7 +112,8 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
                 message.author.id == "148867458441281537") or (
-                message.author.id == "417606473947021312")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
+                message.author.id == "417606473947021312") or (
+                message.author.id == "249181931281842186")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
             if deploymentIsHappening:
                 await client.send_message(discord.Object(id='511736808544010275'),
                                           "**DEPLOYMENT CANCELLED AT " + timestamp[1] + " GMT.**")
@@ -213,7 +216,8 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
     if ((message.content).lower()).startswith("!cancel"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
-                message.author.id == "148867458441281537")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
+                message.author.id == "148867458441281537") or (
+                message.author.id == "249181931281842186")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
             if(waitingForConfirmation):
                 waitingForConfirmation = False
                 msg = "**CANCELLATION CONFIRMED**"
@@ -264,7 +268,8 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
                 message.author.id == "148867458441281537") or (
-                message.author.id == "417606473947021312")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
+                message.author.id == "417606473947021312") or (
+                message.author.id == "249181931281842186")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
             req = (message.content).lower()
             splitreq = req.split(" ")
             try:
@@ -314,7 +319,8 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
                 message.author.id == "148867458441281537") or (
-                message.author.id == "417606473947021312")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
+                message.author.id == "417606473947021312") or (
+                message.author.id == "249181931281842186")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
             req = (message.content).lower()
             splitreq = req.split(" ")
             try:
