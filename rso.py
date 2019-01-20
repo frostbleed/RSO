@@ -86,6 +86,14 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
     if ((message.content).lower()).startswith("!daycare"):
         msg = "\"This is SWAT, not daycare.\" - NCISrox"
         await client.send_message(message.channel, msg)
+        
+    if ((message.content).lower()).startswith("frost"):
+        msg = "*Sir"
+        await client.send_message(message.channel, msg)
+        
+    if ((message.content).lower()).startswith("epic"):
+        msg = "Epic Ben Shapiro gamer moment"
+        await client.send_message(message.channel, msg)
 
     if ((message.content).lower()).startswith("!delete"):
         if ((message.author.id == "172128816280371200") or (
