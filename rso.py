@@ -66,7 +66,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
     if ((message.content).lower()).startswith("!enddeploy"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
-                message.author.id == "148867458441281537") or (
+                message.author.id == "535577946526842883") or (
                 message.author.id == "417606473947021312") or (
                 message.author.id == "220553967627796480") or (
                 message.author.id == "249181931281842186")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
@@ -90,7 +90,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
     if ((message.content).lower()).startswith("!delete"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
-                message.author.id == "148867458441281537") or (
+                message.author.id == "535577946526842883") or (
                 message.author.id == "417606473947021312") or (
                 message.author.id == "220553967627796480") or (
                 message.author.id == "249181931281842186")):  # ADD ONLY LIEUTENANT+ HERE
@@ -113,7 +113,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
     if ((message.content).lower()).startswith("!cancelorder"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
-                message.author.id == "148867458441281537") or (
+                message.author.id == "535577946526842883") or (
                 message.author.id == "417606473947021312") or (
                 message.author.id == "220553967627796480") or (
                 message.author.id == "249181931281842186")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
@@ -219,7 +219,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
     if ((message.content).lower()).startswith("!cancel"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
-                message.author.id == "148867458441281537") or (
+                message.author.id == "535577946526842883") or (
                 message.author.id == "220553967627796480") or (
                 message.author.id == "249181931281842186")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
             if(waitingForConfirmation):
@@ -271,7 +271,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
     if ((message.content).lower()).startswith("!standby"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
-                message.author.id == "148867458441281537") or (
+                message.author.id == "535577946526842883") or (
                 message.author.id == "417606473947021312") or (
                 message.author.id == "220553967627796480") or (
                 message.author.id == "249181931281842186")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
@@ -323,7 +323,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
     if ((message.content).lower()).startswith("!deploy"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
-                message.author.id == "148867458441281537") or (
+                message.author.id == "535577946526842883") or (
                 message.author.id == "417606473947021312") or (
                 message.author.id == "220553967627796480") or (
                 message.author.id == "249181931281842186")):  # ADD ONLY HEAD OF OPERATIONS+ HERE
