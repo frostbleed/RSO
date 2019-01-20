@@ -92,7 +92,7 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         await client.send_message(message.channel, msg)
         
     if ((message.content).lower()).startswith("epic"):
-        msg = "Epic Ben Shapiro gamer moment"
+        msg = "Ben Shapiro epic gamer moment"
         await client.send_message(message.channel, msg)
 
     if ((message.content).lower()).startswith("!delete"):
