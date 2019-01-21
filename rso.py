@@ -99,6 +99,10 @@ ALL UNITS SHALL RESPOND WHEN AND IF AN ORDER IS ISSUED WITHIN FIVE (5) MINUTES.'
         msg = "*Hon. President pro tempore snowbleed"
         await client.send_message(message.channel, msg)
         
+    if ((message.content).lower()).startswith("kyle"):
+        msg = "*KYLELUONG2004"
+        await client.send_message(message.channel, msg)
+        
     if ((message.content).lower()).startswith("!delete"):
         if ((message.author.id == "172128816280371200") or (
                 message.author.id == "259819311735111681") or (
